@@ -7,6 +7,17 @@ namespace YaEm
 		private int _max;
 		private int _current;
 
+		public Health(int max)
+		{
+			_max = max;
+		}
+
+		public Health(int max, int current)
+		{
+			_max = max;
+			_current = current;
+		}
+
 		public int Max => _max;
 
 		public int Current => _current;

@@ -17,6 +17,8 @@ namespace YaEm
 		private Vector2 _direction;
 		private IMovmentStrategy _strategy;
 
+		public DamageArgs DamageArgs;
+
 		private void Update()
 		{
 			_prevPosition = Position;
@@ -43,6 +45,8 @@ namespace YaEm
 				}
 				else
 				{
+					//todo make standart projectile collision interaction
+					//and leave special interactions for IProjectileReactable
 					RemoveProjectile();
 				}
 			}
@@ -58,5 +62,7 @@ namespace YaEm
 		{
 			_direction = direction.normalized;
 		}
+
+		public Vector2 Direction{ get { return _direction; } }
 	}
 }

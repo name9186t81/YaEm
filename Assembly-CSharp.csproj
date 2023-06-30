@@ -69,6 +69,15 @@
     <Compile Include="Assets\Scripts\Mechanics\Weapons\LinearMovment.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Health\Health.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\MovmentStrategyFactory.cs" />
+    <Compile Include="Assets\Scripts\Controllable\IController.cs" />
+    <Compile Include="Assets\Scripts\Controllable\ControllerAction.cs" />
+    <Compile Include="Assets\Scripts\Actors\Unit.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\Motor.cs" />
+    <Compile Include="Assets\Scripts\Architecture\IProvider.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\PushForce.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\BaseForce.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\ForceFactory.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\IForce.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
