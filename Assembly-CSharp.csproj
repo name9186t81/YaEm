@@ -61,6 +61,14 @@
     <Compile Include="Assets\Scripts\Architecture\ServiceLocator.cs" />
     <Compile Include="Assets\Scripts\Actors\Actor.cs" />
     <Compile Include="Assets\Scripts\Actors\ActorSO.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Health\IHealth.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Health\DamageArgs.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\IProjectileReactable.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\IMovmentStrategy.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\LinearMovment.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Health\Health.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\MovmentStrategyFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

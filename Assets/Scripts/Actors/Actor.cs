@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Actor : MonoBehaviour
+public abstract class Actor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] private int _teamNumber;
+	[SerializeField] private string _name;
+	private Transform _cached;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void Awake()
+	{
+		_cached = transform;
+		Init();
+	}
+
+	protected virtual void Init() { }
+
+	public Transform Transform{ get { return _cached; } }
+	public Vector2 Position { get { return _cached.position; } set { _cached.position = value; } }
+	public string Name { get { return _name; } }
 }
