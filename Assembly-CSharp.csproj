@@ -78,6 +78,10 @@
     <Compile Include="Assets\Scripts\Mechanics\Movment\BaseForce.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\ForceFactory.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\IForce.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Misc\Vector2Utils.cs" />
+    <Compile Include="Assets\Scripts\Controllable\PCController.cs" />
+    <Compile Include="Assets\Scripts\Effects\ProjectileBounceGlower.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -850,6 +854,15 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Sysroot.Linux_x86_64">
+      <HintPath>Library\ScriptAssemblies\Unity.Sysroot.Linux_x86_64.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
+      <HintPath>Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.SysrootPackage.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.SysrootPackage.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

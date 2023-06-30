@@ -20,6 +20,11 @@ namespace YaEm {
 			_motor = new Motor(_speed, _rotationSpeed, this);
 		}
 
+		private void Update()
+		{
+			_motor.Update(Time.deltaTime);
+		}
+
 		private void OnValidate()
 		{
 			_maxHealth = Mathf.Max(_maxHealth, 0);

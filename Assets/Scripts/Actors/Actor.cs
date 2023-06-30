@@ -23,6 +23,13 @@ namespace YaEm {
 
 		protected virtual void Init() { }
 
+		public bool TryChangeController(IController newController)
+		{
+			//todo implement prevention mechanism to avoid mindless controller changes
+			_controller = newController;
+			return true;
+		}
+
 		protected virtual void OnDrawGizmos()
 		{
 			if (!_debug) return;
