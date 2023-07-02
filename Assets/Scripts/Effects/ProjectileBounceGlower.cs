@@ -14,7 +14,8 @@ namespace YaEm
 
 		private void Hit(RaycastHit2D obj)
 		{
-			_projectile.DamageArgs.Damage *= 2;
+			//todo separate damage operation
+			_projectile.DamageArgs.Damage = (int)(_projectile.DamageArgs.Damage * 1.5f);
 			GetComponent<ParticleSystem>().maxParticles++;
 		}
 	}

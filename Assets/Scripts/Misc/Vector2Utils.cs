@@ -17,6 +17,10 @@ namespace YaEm
         public static float AngleFromVector(this Vector2 vector)
         {
             return Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
-        }
-    }
+		}
+		public static float AngleFromVector(this Vector3 vector)
+		{
+			return Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+		}
+	}
 }

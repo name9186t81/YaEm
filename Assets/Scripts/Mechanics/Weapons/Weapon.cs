@@ -76,6 +76,7 @@ namespace YaEm
 				var obj = Instantiate<Projectile>(_projectilePrefab,_shootPoint.position ,default ,null);
 				obj.DamageArgs = new DamageArgs(_owner, _damage, Vector2.zero);
 				obj.ChangeDirection(_shootPoint.up);
+				obj.TryChangeTeamNumber(_owner.TeamNumber);
 
 				OnFire?.Invoke();
 				yield return new WaitForSeconds(_delayPerProjectile);

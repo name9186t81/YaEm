@@ -56,32 +56,37 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Effects\KineticLine.cs" />
-    <Compile Include="Assets\Scripts\Architecture\BootsTrap.cs" />
-    <Compile Include="Assets\Scripts\Architecture\ServiceLocator.cs" />
-    <Compile Include="Assets\Scripts\Actors\Actor.cs" />
-    <Compile Include="Assets\Scripts\Actors\ActorSO.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Weapons\Projectile.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Health\IHealth.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Health\DamageArgs.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Weapons\IProjectileReactable.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Weapons\IMovmentStrategy.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Weapons\LinearMovment.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Health\Health.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\MovmentStrategyFactory.cs" />
-    <Compile Include="Assets\Scripts\Controllable\IController.cs" />
-    <Compile Include="Assets\Scripts\Controllable\ControllerAction.cs" />
-    <Compile Include="Assets\Scripts\Actors\Unit.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Movment\Motor.cs" />
-    <Compile Include="Assets\Scripts\Architecture\IProvider.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Movment\PushForce.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Movment\BaseForce.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Movment\ForceFactory.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Movment\IForce.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Effects\KineticLine.cs" />
     <Compile Include="Assets\Scripts\Misc\Vector2Utils.cs" />
-    <Compile Include="Assets\Scripts\Controllable\PCController.cs" />
+    <Compile Include="Assets\Scripts\Architecture\ServiceLocator.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\IForce.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\IMovmentStrategy.cs" />
+    <Compile Include="Assets\Scripts\AI\AIController.cs" />
+    <Compile Include="Assets\Scripts\Misc\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Controllable\IController.cs" />
     <Compile Include="Assets\Scripts\Effects\ProjectileBounceGlower.cs" />
+    <Compile Include="Assets\Scripts\Actors\ActorSO.cs" />
+    <Compile Include="Assets\Scripts\Effects\TeamColorAdapter.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Health\IHealth.cs" />
+    <Compile Include="Assets\Scripts\Architecture\BootsTrap.cs" />
+    <Compile Include="Assets\Scripts\Architecture\IProvider.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\Motor.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Health\DamageArgs.cs" />
+    <Compile Include="Assets\Scripts\Controllable\ControllerAction.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\LinearMovment.cs" />
+    <Compile Include="Assets\Scripts\Effects\ColorTable.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Health\Health.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\BaseForce.cs" />
+    <Compile Include="Assets\Scripts\Actors\Actor.cs" />
+    <Compile Include="Assets\Scripts\Actors\Unit.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\IProjectileReactable.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Controllable\PCController.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\ForceFactory.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Movment\PushForce.cs" />
+    <Compile Include="Assets\Scripts\AI\AIVision.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -753,6 +758,9 @@
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Sysroot.Linux_x86_64">
+      <HintPath>Library\ScriptAssemblies\Unity.Sysroot.Linux_x86_64.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
@@ -804,9 +812,6 @@
     <Reference Include="Unity.2D.Tilemap.Extras.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Services.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
@@ -822,6 +827,9 @@
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Services.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
@@ -836,6 +844,9 @@
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
+      <HintPath>Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
@@ -854,12 +865,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Sysroot.Linux_x86_64">
-      <HintPath>Library\ScriptAssemblies\Unity.Sysroot.Linux_x86_64.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
-      <HintPath>Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
     </Reference>
     <Reference Include="Unity.SysrootPackage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.SysrootPackage.Editor.dll</HintPath>

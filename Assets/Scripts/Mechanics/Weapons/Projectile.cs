@@ -37,6 +37,7 @@ namespace YaEm
 		protected override void Init()
 		{
 			_strategy = MovmentStrategyFactory.GetStrategy(_speed, _movmentType);
+			_prevPosition = Position;
 		}
 
 		private void LateUpdate()

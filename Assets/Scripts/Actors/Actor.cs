@@ -12,6 +12,10 @@ namespace YaEm {
 		private Transform _cached;
 
 		/// <summary>
+		/// first argument is old team, second is new
+		/// </summary>
+		public event Action<int, int> OnTeamNumberChange;
+		/// <summary>
 		/// first controller is an old one, second is new
 		/// </summary>
 		public event Action<IController, IController> OnControllerChange;
@@ -29,6 +33,13 @@ namespace YaEm {
 			_controller = newController;
 			return true;
 		}
+		public bool TryChangeTeamNumber(int newTeamNumber)
+		{
+			OnTeamNumberChange?.Invoke(_teamNumber, newTeamNumber);
+			_teamNumber = newTeamNumber;
+			return true;	
+		}
+
 
 		protected virtual void OnDrawGizmos()
 		{
@@ -42,6 +53,7 @@ namespace YaEm {
 		public Vector2 Position { get { return _cached.position; } set { _cached.position = value; } }
 		public string Name { get { return _name; } }
 		public float Size { get { return _size; } }
+		public int TeamNumber => _teamNumber;
 		public IController CurrentController{ get { return _controller; } }	
 	}
 }
