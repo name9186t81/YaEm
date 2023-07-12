@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace YaEm
 {
@@ -9,7 +10,7 @@ namespace YaEm
 
 		public Health(int max)
 		{
-			_max = max;
+			_current = _max = max;
 		}
 
 		public Health(int max, int current)
@@ -28,6 +29,7 @@ namespace YaEm
 		public int TakeDamage(DamageArgs args)
 		{
 			_current -= args.Damage;
+			UnityEngine.Debug.Log(args.Damage);
 
 			if (args.Damage > 0)
 			{

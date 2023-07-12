@@ -7,6 +7,7 @@ namespace YaEm {
 		[SerializeField] private int _maxHealth;
 		[SerializeField] private float _speed;
 		[SerializeField] private float _rotationSpeed;
+		[SerializeField] private bool _reactToHit = true;
 		private IHealth _health;
 		private Motor _motor;
 
@@ -18,6 +19,13 @@ namespace YaEm {
 			//todo implement health factory
 			_health = new Health(_maxHealth);
 			_motor = new Motor(_speed, _rotationSpeed, this);
+			_health.OnDeath += Die;
+		}
+
+		private void Die(DamageArgs obj)
+		{
+			_health.OnDeath -= Die;
+			Destroy(gameObject); //todo use pool perhaps
 		}
 
 		private void Update()
@@ -30,8 +38,10 @@ namespace YaEm {
 			_maxHealth = Mathf.Max(_maxHealth, 0);
 		}
 
-		public void OnHit(Projectile projectile)
+		public void OnHit(Projectile projectile, Vector2 normal)
 		{
+			if (!_reactToHit) return;
+
 			_health.TakeDamage(projectile.DamageArgs);
 			projectile.RemoveProjectile();
 		}

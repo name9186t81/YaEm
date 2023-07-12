@@ -13,12 +13,12 @@ namespace YaEm.AI {
 		private float _delay;
 		private AIController _controller;
 		private IList<Actor> _cachedScan;
-		private IList<Actor> _enemies;
-		private IList<Actor> _alies;
+		private IReadOnlyList<Actor> _enemies;
+		private IReadOnlyList<Actor> _alies;
 
 		public IReadOnlyList<Actor> ActorsInRange => (IReadOnlyList<Actor>)_cachedScan;
-		public IReadOnlyList<Actor> EnemiesInRange => (IReadOnlyList<Actor>)_enemies;
-		public IReadOnlyList<Actor> AliesInRange => (IReadOnlyList<Actor>)_alies;
+		public IReadOnlyList<Actor> EnemiesInRange => _enemies;
+		public IReadOnlyList<Actor> AliesInRange => _alies;
 
 
 		private void Awake()
@@ -52,6 +52,8 @@ namespace YaEm.AI {
 			if (_angle < 360) listed = ClearForAngle(listed);
 
 			_cachedScan = listed;
+			_enemies = SortForTeamNumber(_controller.Actor.TeamNumber, true);
+			_alies = SortForTeamNumber(_controller.Actor.TeamNumber, false);
 		}
 
 		public IReadOnlyList<Actor> SortForTeamNumber(int teamNumber, bool excluded)

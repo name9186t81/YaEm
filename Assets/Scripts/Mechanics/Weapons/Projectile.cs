@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace YaEm
@@ -25,6 +26,7 @@ namespace YaEm
 		private Vector2 _prevPosition;
 		private Vector2 _direction;
 		private IMovmentStrategy _strategy;
+		private bool _active = true;
 
 		public DamageArgs DamageArgs;
 		public event Action<RaycastHit2D> OnHit;
@@ -42,6 +44,8 @@ namespace YaEm
 
 		private void LateUpdate()
 		{
+			if (!_active) return;
+
 			Position += _strategy.Move(_direction) * Time.deltaTime;
 			Vector2 currentPosition = Position;
 			float distance = (currentPosition - _prevPosition).magnitude;
@@ -50,9 +54,10 @@ namespace YaEm
 			var raycast = Physics2D.Raycast(_prevPosition, direction, distance, _hitMask);
 			if (raycast)
 			{
+				Position = raycast.point;
 				if (raycast.transform.TryGetComponent<IProjectileReactable>(out IProjectileReactable reactable))
 				{
-					reactable.OnHit(this);
+					reactable.OnHit(this, raycast.normal);
 					OnHit?.Invoke(raycast);
 				}
 				else
@@ -61,10 +66,7 @@ namespace YaEm
 					//and leave special interactions for IProjectileReactable
 					if (_react == StandartHitReact.Bounce && _bounceTimes++ < _maxBounceTimes)
 					{
-						_direction = Vector2.Reflect(_direction, raycast.normal);
-						Position = raycast.point + _direction * _speed * Time.deltaTime;
-						_prevPosition = Position;
-						transform.rotation = Quaternion.AngleAxis(_direction.AngleFromVector(), Vector3.forward);
+						Reflect(raycast.normal);
 						OnHit?.Invoke(raycast);
 						return;
 					}
@@ -73,11 +75,19 @@ namespace YaEm
 			}
 		}
 
+		public void Reflect(Vector2 normal)
+		{
+			_direction = Vector2.Reflect(_direction, normal);
+			Position += _direction * _speed * Time.deltaTime;
+			_prevPosition = Position;
+			transform.rotation = Quaternion.AngleAxis(_direction.AngleFromVector(), Vector3.forward);
+		}
+
 		public void RemoveProjectile()
 		{
 			//todo make a projectile pool
 			Destroy(gameObject, 2);
-			enabled = false;
+			enabled = _active = false;
 		}
 
 		public void ChangeDirection(Vector2 direction)

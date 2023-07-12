@@ -58,18 +58,24 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Mechanics\Weapons\MovmentStrategyFactory.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\Weapon.cs" />
+    <Compile Include="Assets\Scripts\AI\AIVision.cs" />
     <Compile Include="Assets\Scripts\Effects\KineticLine.cs" />
     <Compile Include="Assets\Scripts\Misc\Vector2Utils.cs" />
     <Compile Include="Assets\Scripts\Architecture\ServiceLocator.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\IForce.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\IMovmentStrategy.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\ISpread.cs" />
     <Compile Include="Assets\Scripts\AI\AIController.cs" />
     <Compile Include="Assets\Scripts\Misc\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Controllable\IController.cs" />
+    <Compile Include="Assets\Scripts\Actors\TeamSync.cs" />
     <Compile Include="Assets\Scripts\Effects\ProjectileBounceGlower.cs" />
     <Compile Include="Assets\Scripts\Actors\ActorSO.cs" />
     <Compile Include="Assets\Scripts\Effects\TeamColorAdapter.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\FixedSpread.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\SpreadFactory.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Health\IHealth.cs" />
+    <Compile Include="Assets\Scripts\Actors\LinkedUnit.cs" />
     <Compile Include="Assets\Scripts\Architecture\BootsTrap.cs" />
     <Compile Include="Assets\Scripts\Architecture\IProvider.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\Motor.cs" />
@@ -78,6 +84,8 @@
     <Compile Include="Assets\Scripts\Mechanics\Weapons\LinearMovment.cs" />
     <Compile Include="Assets\Scripts\Effects\ColorTable.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Health\Health.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\AngleSpread.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Weapons\BulletDeflector.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\BaseForce.cs" />
     <Compile Include="Assets\Scripts\Actors\Actor.cs" />
     <Compile Include="Assets\Scripts\Actors\Unit.cs" />
@@ -86,7 +94,7 @@
     <Compile Include="Assets\Scripts\Controllable\PCController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\ForceFactory.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\PushForce.cs" />
-    <Compile Include="Assets\Scripts\AI\AIVision.cs" />
+    <Compile Include="Assets\Scripts\Actors\Destructable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

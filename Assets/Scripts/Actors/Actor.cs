@@ -30,16 +30,17 @@ namespace YaEm {
 		public bool TryChangeController(IController newController)
 		{
 			//todo implement prevention mechanism to avoid mindless controller changes
+			OnControllerChange?.Invoke(_controller, newController);
 			_controller = newController;
 			return true;
 		}
+
 		public bool TryChangeTeamNumber(int newTeamNumber)
 		{
 			OnTeamNumberChange?.Invoke(_teamNumber, newTeamNumber);
 			_teamNumber = newTeamNumber;
 			return true;	
 		}
-
 
 		protected virtual void OnDrawGizmos()
 		{

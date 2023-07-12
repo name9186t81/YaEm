@@ -19,7 +19,14 @@ namespace YaEm
 		[SerializeField] private float _delayPerProjectile;
 		[SerializeField] private int _projectilesCount;
 		[SerializeField] private int _damage;
+
+		[Header("Spread settings")]
+		[SerializeField] private SpreadType _type;
+		[SerializeField] private int _iterations;
+		[SerializeField] private float _angle;
+
 		private bool _isFiring = false;
+		private ISpread _spread;
 
 		public event Action OnPreFireStart;
 		public event Action OnPreFireEnd;
@@ -33,6 +40,7 @@ namespace YaEm
 
 		private void Start()
 		{
+			_spread = _type == SpreadType.Fixed ? SpreadFactory.GetSpread() : SpreadFactory.GetSpread(_angle, _iterations, _owner);
 			OnPreFireStart += () => PreFireStart?.Invoke();
 			OnPreFireEnd += () => PreFireEnd?.Invoke();
 			OnFire += () => Fire?.Invoke();
@@ -75,7 +83,7 @@ namespace YaEm
 			{
 				var obj = Instantiate<Projectile>(_projectilePrefab,_shootPoint.position ,default ,null);
 				obj.DamageArgs = new DamageArgs(_owner, _damage, Vector2.zero);
-				obj.ChangeDirection(_shootPoint.up);
+				obj.ChangeDirection(_spread.GetSpreadedDirection(_shootPoint.up));
 				obj.TryChangeTeamNumber(_owner.TeamNumber);
 
 				OnFire?.Invoke();
@@ -96,5 +104,11 @@ namespace YaEm
 			Gizmos.DrawWireSphere(originPoint, _owner.Size / 4);
 			Gizmos.DrawWireSphere(_shootPoint.position, _owner.Size / 4);
 		}
+	}
+
+	public enum SpreadType
+	{
+		Fixed,
+		Angle
 	}
 }
