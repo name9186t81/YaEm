@@ -1,5 +1,5 @@
 using System;
-using System.Reflection;
+using System.Collections;
 using UnityEngine;
 
 namespace YaEm
@@ -22,12 +22,18 @@ namespace YaEm
 		[SerializeField] private LayerMask _hitMask;
 		[SerializeField] private StandartHitReact _react;
 		[SerializeField] private int _maxBounceTimes;
+		[SerializeField] private float _deactivationTime;
+
+		private WaitForSeconds _delay;
 		private int _bounceTimes;
 		private Vector2 _prevPosition;
 		private Vector2 _direction;
 		private IMovmentStrategy _strategy;
 		private bool _active = true;
+		private Pool<Projectile> _storedPool;
+		private float _speedMod;
 
+		public event Action OnInit;
 		public DamageArgs DamageArgs;
 		public event Action<RaycastHit2D> OnHit;
 
@@ -40,13 +46,25 @@ namespace YaEm
 		{
 			_strategy = MovmentStrategyFactory.GetStrategy(_speed, _movmentType);
 			_prevPosition = Position;
+			_delay = new WaitForSeconds(_deactivationTime);
+		}
+
+		public void Init(Pool<Projectile> pool, int team, float speedModifier = 1)
+		{
+			enabled = true;
+			gameObject.SetActive(true);
+
+			_storedPool = pool;
+			_speedMod = speedModifier;
+			TryChangeTeamNumber(team);
+			OnInit?.Invoke();
 		}
 
 		private void LateUpdate()
 		{
 			if (!_active) return;
 
-			Position += _strategy.Move(_direction) * Time.deltaTime;
+			Position += _strategy.Move(_direction) * Time.deltaTime * _speedMod;
 			Vector2 currentPosition = Position;
 			float distance = (currentPosition - _prevPosition).magnitude;
 			Vector2 direction = (currentPosition - _prevPosition) / distance;
@@ -55,7 +73,7 @@ namespace YaEm
 			if (raycast)
 			{
 				Position = raycast.point;
-				if (raycast.transform.TryGetComponent<IProjectileReactable>(out IProjectileReactable reactable))
+				if (raycast.transform.TryGetComponent(out IProjectileReactable reactable))
 				{
 					reactable.OnHit(this, raycast.normal);
 					OnHit?.Invoke(raycast);
@@ -85,14 +103,31 @@ namespace YaEm
 
 		public void RemoveProjectile()
 		{
-			//todo make a projectile pool
-			Destroy(gameObject, 2);
+			if (_storedPool != null) _storedPool.ReturnToPool(this);
+			else DisposeProjectile(); //todo maybe track active projectiles in weapon class...
 			enabled = _active = false;
 		}
 
 		public void ChangeDirection(Vector2 direction)
 		{
 			_direction = direction.normalized;
+		}
+
+		public void DisposeProjectile()
+		{
+			Destroy(gameObject);
+		}
+
+		public void Deactivate()
+		{
+			StartCoroutine(DelayRoutine());
+		}
+
+		private IEnumerator DelayRoutine()
+		{
+			enabled = false;
+			yield return _delay;
+			gameObject.SetActive(false);
 		}
 
 		public int BounceTimes => _bounceTimes;

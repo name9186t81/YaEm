@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{5601FD5C-AEB5-56E8-1FF8-EFBBA2288723}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -60,6 +61,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Weapons\Weapon.cs" />
     <Compile Include="Assets\Scripts\AI\AIVision.cs" />
     <Compile Include="Assets\Scripts\Effects\KineticLine.cs" />
+    <Compile Include="Assets\Scripts\Misc\Pool.cs" />
     <Compile Include="Assets\Scripts\Misc\Vector2Utils.cs" />
     <Compile Include="Assets\Scripts\Architecture\ServiceLocator.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\IForce.cs" />

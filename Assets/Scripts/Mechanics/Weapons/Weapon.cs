@@ -25,6 +25,7 @@ namespace YaEm
 		[SerializeField] private int _iterations;
 		[SerializeField] private float _angle;
 
+		private Pool<Projectile> _projectiles;
 		private bool _isFiring = false;
 		private ISpread _spread;
 
@@ -54,6 +55,16 @@ namespace YaEm
 			}
 
 			_owner.OnControllerChange += UpdateSubs;
+
+			_projectiles = new Pool<Projectile>(() =>
+			{
+				var obj = Instantiate<Projectile>(_projectilePrefab, _shootPoint.position, default, null);
+				obj.DamageArgs = new DamageArgs(_owner, _damage, Vector2.zero);
+				obj.ChangeDirection(_spread.GetSpreadedDirection(_shootPoint.up));
+				obj.Init(_projectiles, _owner.TeamNumber);
+				return obj;
+			});
+			_projectiles.OnReturn += (Projectile proj) => proj.Deactivate();
 		}
 
 		private void UpdateSubs(IController arg1, IController arg2)
@@ -103,6 +114,15 @@ namespace YaEm
 			Vector2 originPoint = (Vector2)_owner.transform.position + Vector2Utils.VectorFromAngle(_originAngle) * _owner.Size + Vector2Utils.VectorFromAngle(_originAngle) * _offset * _owner.Size;
 			Gizmos.DrawWireSphere(originPoint, _owner.Size / 4);
 			Gizmos.DrawWireSphere(_shootPoint.position, _owner.Size / 4);
+		}
+
+		private void OnDestroy()
+		{
+			//todo maybe make global projectiles pool?
+			foreach (var proj in _projectiles.Stored)
+			{
+				Destroy(proj.gameObject);
+			}
 		}
 	}
 
