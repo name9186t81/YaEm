@@ -104,13 +104,14 @@ MonoBehaviour:
   _name: bulla
   _size: 0.1
   _debug: 1
-  _speed: 40
+  _speed: 60
   _movmentType: 0
   _hitMask:
     serializedVersion: 2
     m_Bits: 2147483647
   _react: 1
   _maxBounceTimes: 0
+  _deactivationTime: 0
 --- !u!96 &1728015072875418897
 TrailRenderer:
   serializedVersion: 2

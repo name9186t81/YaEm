@@ -2,11 +2,22 @@ using UnityEngine;
 
 public static class Vector2Utils
 {
+    /// <summary>
+    /// angle in radians
+    /// </summary>
+    /// <param name="angle"></param>
+    /// <returns></returns>
     public static Vector2 VectorFromAngle(this float angle)
     {
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
+    /// <summary>
+    /// angle in radians
+    /// </summary>
+    /// <param name="v"></param>
+    /// <param name="angle"></param>
+    /// <returns></returns>
     public static Vector2 Rotate(this Vector2 v, float angle)
     {
         float cos = Mathf.Cos(angle);

@@ -58,10 +58,10 @@ namespace YaEm
 
 			_projectiles = new Pool<Projectile>(() =>
 			{
-				var obj = Instantiate<Projectile>(_projectilePrefab, _shootPoint.position, default, null);
-				obj.DamageArgs = new DamageArgs(_owner, _damage, Vector2.zero);
+				var obj = Instantiate<Projectile>(_projectilePrefab);
+				var args = new DamageArgs(_owner, _damage, Vector2.zero);
 				obj.ChangeDirection(_spread.GetSpreadedDirection(_shootPoint.up));
-				obj.Init(_projectiles, _owner.TeamNumber);
+				obj.Init(_projectiles, args, _owner.TeamNumber, ShootPoint, ShootDirection);
 				return obj;
 			});
 			_projectiles.OnReturn += (Projectile proj) => proj.Deactivate();
@@ -92,11 +92,9 @@ namespace YaEm
 
 			for (int i = 0; i < _projectilesCount; i++)
 			{
-				var obj = Instantiate<Projectile>(_projectilePrefab,_shootPoint.position ,default ,null);
-				obj.DamageArgs = new DamageArgs(_owner, _damage, Vector2.zero);
-				obj.ChangeDirection(_spread.GetSpreadedDirection(_shootPoint.up));
-				obj.TryChangeTeamNumber(_owner.TeamNumber);
-
+				var obj = _projectiles.Get();
+				var args = new DamageArgs(_owner, _damage, Vector2.zero);
+				obj.Init(_projectiles, args, _owner.TeamNumber, ShootPoint, ShootDirection, 1f);
 				OnFire?.Invoke();
 				yield return new WaitForSeconds(_delayPerProjectile);
 			}
@@ -113,7 +111,7 @@ namespace YaEm
 			Gizmos.color = Color.red;
 			Vector2 originPoint = (Vector2)_owner.transform.position + Vector2Utils.VectorFromAngle(_originAngle) * _owner.Size + Vector2Utils.VectorFromAngle(_originAngle) * _offset * _owner.Size;
 			Gizmos.DrawWireSphere(originPoint, _owner.Size / 4);
-			Gizmos.DrawWireSphere(_shootPoint.position, _owner.Size / 4);
+			Gizmos.DrawWireSphere(ShootPoint, _owner.Size / 4);
 		}
 
 		private void OnDestroy()
@@ -124,6 +122,9 @@ namespace YaEm
 				Destroy(proj.gameObject);
 			}
 		}
+
+		private Vector2 ShootDirection => _shootPoint.up;
+		private Vector2 ShootPoint => _shootPoint.position;
 	}
 
 	public enum SpreadType
@@ -131,4 +132,6 @@ namespace YaEm
 		Fixed,
 		Angle
 	}
+
+	
 }

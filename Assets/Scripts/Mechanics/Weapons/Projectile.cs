@@ -31,7 +31,7 @@ namespace YaEm
 		private IMovmentStrategy _strategy;
 		private bool _active = true;
 		private Pool<Projectile> _storedPool;
-		private float _speedMod;
+		private float _speedMod = 1;
 
 		public event Action OnInit;
 		public DamageArgs DamageArgs;
@@ -49,11 +49,15 @@ namespace YaEm
 			_delay = new WaitForSeconds(_deactivationTime);
 		}
 
-		public void Init(Pool<Projectile> pool, int team, float speedModifier = 1)
+		public void Init(Pool<Projectile> pool, DamageArgs args, int team, Vector2 position, Vector2 direction, float speedModifier = 1)
 		{
-			enabled = true;
+			_prevPosition = Position = position;
+			_active = enabled = true;
 			gameObject.SetActive(true);
+			_direction = direction;
+			DamageArgs = args;
 
+			_bounceTimes = 0;
 			_storedPool = pool;
 			_speedMod = speedModifier;
 			TryChangeTeamNumber(team);
@@ -65,6 +69,7 @@ namespace YaEm
 			if (!_active) return;
 
 			Position += _strategy.Move(_direction) * Time.deltaTime * _speedMod;
+
 			Vector2 currentPosition = Position;
 			float distance = (currentPosition - _prevPosition).magnitude;
 			Vector2 direction = (currentPosition - _prevPosition) / distance;
@@ -125,9 +130,10 @@ namespace YaEm
 
 		private IEnumerator DelayRoutine()
 		{
-			enabled = false;
+			_active = false;
 			yield return _delay;
 			gameObject.SetActive(false);
+			_storedPool.ReturnToPool(this);
 		}
 
 		public int BounceTimes => _bounceTimes;

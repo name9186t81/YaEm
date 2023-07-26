@@ -12,6 +12,10 @@ namespace YaEm
 					{
 						return new LinearMovment(speed);
 					}
+				case MovmentStrategy.Sin:
+					{
+						return new SinusMovment(speed);
+					}
 				default:
 					{
 						throw new NotImplementedException();
