@@ -60,8 +60,8 @@ namespace YaEm
 			{
 				var obj = Instantiate<Projectile>(_projectilePrefab);
 				var args = new DamageArgs(_owner, _damage, Vector2.zero);
-				obj.ChangeDirection(_spread.GetSpreadedDirection(_shootPoint.up));
-				obj.Init(_projectiles, args, _owner.TeamNumber, ShootPoint, ShootDirection);
+				obj.ChangeDirection(ShootDirection);
+				obj.Init(_projectiles, args, _owner.TeamNumber, ShootPoint, ShootDirection, _owner);
 				return obj;
 			});
 			_projectiles.OnReturn += (Projectile proj) => proj.Deactivate();
@@ -94,7 +94,7 @@ namespace YaEm
 			{
 				var obj = _projectiles.Get();
 				var args = new DamageArgs(_owner, _damage, Vector2.zero);
-				obj.Init(_projectiles, args, _owner.TeamNumber, ShootPoint, ShootDirection, 1f);
+				obj.Init(_projectiles, args, _owner.TeamNumber, ShootPoint, _spread.GetSpreadedDirection(ShootDirection), _owner, 1f);
 				OnFire?.Invoke();
 				yield return new WaitForSeconds(_delayPerProjectile);
 			}

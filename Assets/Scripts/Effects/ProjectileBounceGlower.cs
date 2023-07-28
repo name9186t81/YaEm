@@ -10,6 +10,7 @@ namespace YaEm
 		private void Awake()
 		{
 			_projectile.OnHit += Hit;
+			_projectile.OnInit += () => GetComponent<ParticleSystem>().maxParticles = 1;
 		}
 
 		private void Hit(RaycastHit2D obj)

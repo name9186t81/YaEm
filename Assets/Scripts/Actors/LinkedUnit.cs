@@ -19,6 +19,12 @@ namespace YaEm
 			_angle = _applied.localPosition.AngleFromVector() * Mathf.Deg2Rad;
 			_applied.SetParent(null);
 			_tracked.Value.OnDeath += (_) => Destroy(gameObject);
+
+			if (TryGetComponent<Actor>(out var act))
+			{
+				_tracked.OnTeamNumberChange += (int old, int newT) => act.TryChangeTeamNumber(newT);
+				act.TryChangeTeamNumber(_tracked.TeamNumber);
+			}
 		}
 
 		private void Update()

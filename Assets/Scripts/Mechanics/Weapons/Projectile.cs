@@ -15,7 +15,9 @@ namespace YaEm
 		Bounce,
 		Destroy
 	}
-	public class Projectile : Actor
+
+	//please god do not inherit from projectile
+	public sealed class Projectile : Actor
 	{
 		[SerializeField] private float _speed;
 		[SerializeField] private MovmentStrategy _movmentType;
@@ -24,6 +26,7 @@ namespace YaEm
 		[SerializeField] private int _maxBounceTimes;
 		[SerializeField] private float _deactivationTime;
 
+		private Actor _owner;
 		private WaitForSeconds _delay;
 		private int _bounceTimes;
 		private Vector2 _prevPosition;
@@ -36,6 +39,7 @@ namespace YaEm
 		public event Action OnInit;
 		public DamageArgs DamageArgs;
 		public event Action<RaycastHit2D> OnHit;
+		public event Action OnDeactivate;
 
 		private void Update()
 		{
@@ -49,7 +53,7 @@ namespace YaEm
 			_delay = new WaitForSeconds(_deactivationTime);
 		}
 
-		public void Init(Pool<Projectile> pool, DamageArgs args, int team, Vector2 position, Vector2 direction, float speedModifier = 1)
+		public void Init(Pool<Projectile> pool, DamageArgs args, int team, Vector2 position, Vector2 direction, Actor owner = null, float speedModifier = 1)
 		{
 			_prevPosition = Position = position;
 			_active = enabled = true;
@@ -57,6 +61,7 @@ namespace YaEm
 			_direction = direction;
 			DamageArgs = args;
 
+			_owner = owner;
 			_bounceTimes = 0;
 			_storedPool = pool;
 			_speedMod = speedModifier;
@@ -77,16 +82,19 @@ namespace YaEm
 			var raycast = Physics2D.Raycast(_prevPosition, direction, distance, _hitMask);
 			if (raycast)
 			{
-				Position = raycast.point;
 				if (raycast.transform.TryGetComponent(out IProjectileReactable reactable))
 				{
+					if (!reactable.CanReact(this)) return;
+
+					Position = raycast.point;
 					reactable.OnHit(this, raycast.normal);
-					OnHit?.Invoke(raycast);
+					if(!reactable.IsHiddenHit) OnHit?.Invoke(raycast);
 				}
 				else
 				{
 					//todo make standart projectile collision interaction
 					//and leave special interactions for IProjectileReactable
+					Position = raycast.point;
 					if (_react == StandartHitReact.Bounce && _bounceTimes++ < _maxBounceTimes)
 					{
 						Reflect(raycast.normal);
@@ -113,9 +121,11 @@ namespace YaEm
 			enabled = _active = false;
 		}
 
-		public void ChangeDirection(Vector2 direction)
+		public void ChangeDirection(Vector2 direction, bool interpMove = true)
 		{
 			_direction = direction.normalized;
+
+			if(interpMove) Position += _direction * _speed * Time.deltaTime;
 		}
 
 		public void DisposeProjectile()
@@ -125,6 +135,7 @@ namespace YaEm
 
 		public void Deactivate()
 		{
+			if(!_active) return;
 			StartCoroutine(DelayRoutine());
 		}
 
@@ -132,10 +143,12 @@ namespace YaEm
 		{
 			_active = false;
 			yield return _delay;
+			OnDeactivate?.Invoke();
 			gameObject.SetActive(false);
 			_storedPool.ReturnToPool(this);
 		}
 
+		public Actor Owner => _owner;
 		public int BounceTimes => _bounceTimes;
 		public int MaxBounceTimes => _maxBounceTimes;
 		public Vector2 Direction{ get { return _direction; } }

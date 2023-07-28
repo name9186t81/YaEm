@@ -14,6 +14,8 @@ namespace YaEm {
 		public IHealth Value => _health;
 		Motor IProvider<Motor>.Value => _motor;
 
+		public bool IsHiddenHit => false;
+
 		protected override void Init()
 		{
 			//todo implement health factory
@@ -44,6 +46,12 @@ namespace YaEm {
 
 			_health.TakeDamage(projectile.DamageArgs);
 			projectile.RemoveProjectile();
+		}
+
+		//todo: perhaps implement friendly fire lock?
+		public bool CanReact(Projectile projectile)
+		{
+			return true;
 		}
 	}
 }

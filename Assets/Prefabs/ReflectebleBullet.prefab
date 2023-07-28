@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 873666193833355798}
   - component: {fileID: 1728015072875418897}
   - component: {fileID: 8952184902284467213}
+  - component: {fileID: -8103983410330465650}
   m_Layer: 0
   m_Name: ReflectebleBullet
   m_TagString: Untagged
@@ -109,7 +110,7 @@ MonoBehaviour:
   _movmentType: 0
   _hitMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 960
   _react: 0
   _maxBounceTimes: 3
   _deactivationTime: 2
@@ -155,7 +156,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 3
+  m_Time: 2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -243,6 +244,19 @@ MonoBehaviour:
   _particleSystems:
   - {fileID: 4199099251898244753}
   _alphaUnneffected: 1
+--- !u!114 &-8103983410330465650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873666193833355799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a786e1a11ded84294c85b185c6ca80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 1728015072875418897}
 --- !u!1 &3379017871956179405
 GameObject:
   m_ObjectHideFlags: 0
@@ -4177,7 +4191,7 @@ ParticleSystem:
     lifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2

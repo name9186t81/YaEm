@@ -20,12 +20,6 @@ namespace YaEm.AI {
 		public IReadOnlyList<Actor> EnemiesInRange => _enemies;
 		public IReadOnlyList<Actor> AliesInRange => _alies;
 
-
-		private void Awake()
-		{
-			enabled = false;
-		}
-
 		public void Init(AIController controller)
 		{
 			enabled = true;
@@ -150,5 +144,8 @@ namespace YaEm.AI {
 			Gizmos.DrawLine(transform.position, dir * _range + transform.position);
 			Gizmos.DrawLine(transform.position, dir2 * _range + transform.position);
 		}
+
+		public int AlliesInRangeCount => _alies == null ? 0 : _alies.Count;
+		public int EnemiesInRangeCount => _enemies == null ? 0 : _enemies.Count;
 	}
 }

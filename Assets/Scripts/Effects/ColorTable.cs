@@ -8,6 +8,7 @@ namespace YaEm
 		{
 			switch (teamNumber)
 			{
+				case -1: return Color.black;
 				case 1: return Color.red;
 				case 2: return Color.green;
 				case 3: return Color.blue;
