@@ -1,6 +1,7 @@
 using UnityEngine;
 
 namespace YaEm {
+	[DisallowMultipleComponent]
 	public class Destructable : Actor, IProjectileReactable, IProvider<IHealth>
 	{
 		[SerializeField] private int _maxHealth;

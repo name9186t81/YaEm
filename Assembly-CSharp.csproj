@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Architecture\IService.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\MovmentStrategyFactory.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\Weapon.cs" />
     <Compile Include="Assets\Scripts\AI\AIVision.cs" />
@@ -71,12 +72,15 @@
     <Compile Include="Assets\Scripts\Actors\TeamSync.cs" />
     <Compile Include="Assets\Scripts\Effects\ProjectileBounceGlower.cs" />
     <Compile Include="Assets\Scripts\Actors\ActorSO.cs" />
+    <Compile Include="Assets\Scripts\GUI\HexHealth.cs" />
     <Compile Include="Assets\Scripts\Effects\TeamColorAdapter.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\FixedSpread.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\SpreadFactory.cs" />
+    <Compile Include="Assets\Scripts\GUI\PlayerTrakerService.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Health\IHealth.cs" />
     <Compile Include="Assets\Scripts\Actors\LinkedUnit.cs" />
     <Compile Include="Assets\Scripts\Architecture\BootsTrap.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIElement.cs" />
     <Compile Include="Assets\Scripts\Architecture\IProvider.cs" />
     <Compile Include="Assets\Scripts\Actors\Destructable.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\Motor.cs" />
@@ -86,25 +90,28 @@
     <Compile Include="Assets\Scripts\Misc\Pool.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\LinearMovment.cs" />
     <Compile Include="Assets\Scripts\Effects\ColorTable.cs" />
+    <Compile Include="Assets\Scripts\Misc\ReloadSceneOnDeath.cs" />
+    <Compile Include="Assets\Scripts\Effects\DeathObject.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Health\Health.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\SinusMovment.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIRecolorer.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\AngleSpread.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\BulletDeflector.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\BaseForce.cs" />
     <Compile Include="Assets\Scripts\Actors\Actor.cs" />
+    <Compile Include="Assets\Scripts\Effects\ProjectileTrailCleaner.cs" />
     <Compile Include="Assets\Scripts\Actors\Unit.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\IProjectileReactable.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Weapons\Projectile.cs" />
     <Compile Include="Assets\Scripts\Controllable\PCController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\ForceFactory.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Movment\PushForce.cs" />
-    <Compile Include="Assets\Scripts\Effects\ProjectileTrailCleaner.cs" />
-    <Compile Include="Assets\Scripts\GUI\PlayerTrakerService.cs" />
-    <Compile Include="Assets\Scripts\Architecture\IService.cs" />
-    <Compile Include="Assets\Scripts\GUI\HexHealth.cs" />
-    <Compile Include="Assets\Scripts\GUI\GUIElement.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Health\HealthExtensions.cs" />
-    <Compile Include="Assets\Scripts\GUI\GUIRecolorer.cs" />
+    <Compile Include="Assets\Scripts\AI\UtilityAI.cs" />
+    <Compile Include="Assets\Scripts\AI\IUtility.cs" />
+    <Compile Include="Assets\Scripts\AI\AIMemory.cs" />
+    <Compile Include="Assets\Scripts\AI\AIMemoryKey.cs" />
+    <Compile Include="Assets\Scripts\AI\AIProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace YaEm
 {
+	[DisallowMultipleComponent]
 	public class TeamSync : MonoBehaviour
 	{
 		[SerializeField] private Actor _tracked;

@@ -4,6 +4,7 @@ namespace YaEm
 {
 	//this script exists solidly because for some reason unity will summarize all colliders
 	//on gameobject into one when calculating rigidbody stuff which i dont want to happen
+	[DisallowMultipleComponent]
 	public class LinkedUnit : MonoBehaviour
 	{
 		[SerializeField] private Unit _tracked;

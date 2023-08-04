@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace YaEm.AI {
+	[DisallowMultipleComponent]
 	public class AIVision : MonoBehaviour
 	{
 		[SerializeField] private float _range;
@@ -15,6 +16,7 @@ namespace YaEm.AI {
 		private IList<Actor> _cachedScan;
 		private IReadOnlyList<Actor> _enemies;
 		private IReadOnlyList<Actor> _alies;
+		private bool _haveCollider;
 
 		public IReadOnlyList<Actor> ActorsInRange => (IReadOnlyList<Actor>)_cachedScan;
 		public IReadOnlyList<Actor> EnemiesInRange => _enemies;
@@ -24,6 +26,7 @@ namespace YaEm.AI {
 		{
 			enabled = true;
 			_controller = controller;
+			_haveCollider = Physics2D.OverlapPoint(_controller.Position);
 		}
 
 		private void Update()
@@ -33,6 +36,12 @@ namespace YaEm.AI {
 			{
 				ForceScan();
 			}
+		}
+
+		public bool CanSeePoint(Vector2 point)
+		{
+			return (!_haveCollider && !Physics2D.Linecast(_controller.Position, point, _scanMask)) ||
+					(_haveCollider && Physics2D.LinecastAll(_controller.Position, point, _scanMask).Length == 1);
 		}
 
 		public void ForceScan()
@@ -93,11 +102,11 @@ namespace YaEm.AI {
 		private IList<Actor> ClearForWalls(IList<Actor> hits)
 		{
 			IList<Actor> newList = new List<Actor>();
-			bool haveCollider = Physics2D.OverlapPoint(_controller.Position);
+
 			foreach (var col in hits)
 			{
-				if ((!haveCollider && !Physics2D.Linecast(_controller.Position, col.transform.position, _scanMask)) ||
-					(haveCollider && Physics2D.LinecastAll(_controller.Position, col.transform.position, _scanMask).Length == 2))
+				if ((!_haveCollider && !Physics2D.Linecast(_controller.Position, col.transform.position, _scanMask)) ||
+					(_haveCollider && Physics2D.LinecastAll(_controller.Position, col.transform.position, _scanMask).Length == 2))
 				{
 					newList.Add(col);
 				}

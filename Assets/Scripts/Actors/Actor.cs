@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 namespace YaEm {
+	[DisallowMultipleComponent]
 	public abstract class Actor : MonoBehaviour
 	{
 		[SerializeField] private int _teamNumber;

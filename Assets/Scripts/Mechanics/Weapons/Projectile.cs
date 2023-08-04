@@ -17,6 +17,7 @@ namespace YaEm
 	}
 
 	//please god do not inherit from projectile
+	[DisallowMultipleComponent]
 	public sealed class Projectile : Actor
 	{
 		[SerializeField] private float _speed;

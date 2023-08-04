@@ -4,11 +4,15 @@ using UnityEngine;
 namespace YaEm.AI
 {
 	//todo: ai calculations are pretty heave so implemented global ai updater and set its tick rate to like 0.1 sec
-	[RequireComponent(typeof(AIVision))]
+	[RequireComponent(typeof(AIVision)), DisallowMultipleComponent]
 	public class AIController : MonoBehaviour, IController
 	{
+		//todo: write custom editor for all of this
 		[SerializeField] private Actor _controlled;
 		[SerializeField] private float _fireThreshold;
+		[SerializeField] private AIProfile _min;
+		[SerializeField] private AIProfile _max;
+		private AIProfile _mixed;
 		private AIVision _vision;
 		private IHealth _health;
 		private Motor _motor;
@@ -35,6 +39,8 @@ namespace YaEm.AI
 			{
 				_motor = motor.Value;
 			}
+
+			_mixed = AIProfile.Mix(_min, _max);
 		}
 
 		private void Update()
@@ -46,7 +52,7 @@ namespace YaEm.AI
 				LookAtPoint(enemy.Position);
 				if (IsEffectiveToFire(enemy.Position))
 					InvokeAction(ControllerAction.Fire);
-				if (Vector2.Distance(enemy.Position, Position) > 5f)
+				if (!enemy.Position.FastDistanceCheck(Position, 25))
 					MoveToThePoint(enemy.Position);
 				else
 					StopMoving();
@@ -79,12 +85,6 @@ namespace YaEm.AI
 			MoveDirection = Vector2.zero;
 		}
 
-		//todo: move into math extensions(?)
-		public bool FastDistanceCheck(Vector2 start, Vector2 end, float dist)
-		{
-			return (start - end).sqrMagnitude < dist * dist;
-		}
-
 		public Vector2 MoveDirection {get { return _direction; } set { _direction = value.normalized; } }
 		public Vector2 DesiredMoveDirection => _direction;
 		public Vector2 Position => _controlled.Position;
@@ -94,6 +94,8 @@ namespace YaEm.AI
 
 		public event Action<ControllerAction> OnAction;
 
+		public float Aggresivness => _mixed.Aggresivness;
+		public float TeamWork => _mixed.TeamWork;
 		public AIVision Vision => _vision;
 		public IHealth Health => _health;
 		public Motor Motor => _motor;

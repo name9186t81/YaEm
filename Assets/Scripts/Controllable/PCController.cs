@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace YaEm
 {
+	[DisallowMultipleComponent]
 	public class PCController : MonoBehaviour, IController
 	{
 		[SerializeField] private Actor _controlled;
@@ -15,7 +16,7 @@ namespace YaEm
 
 		public event Action<ControllerAction> OnAction;
 
-		private void Awake()
+		private void Start()
 		{
 			_controlled.TryChangeController(this);
 		}
@@ -33,7 +34,7 @@ namespace YaEm
 			Vector2 dir = _controlled.Position - (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			_rotation = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
 
-			if (Input.GetKey(KeyCode.Mouse0)) OnAction?.Invoke(ControllerAction.Fire);
+			if (Input.GetKey(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.X)) OnAction?.Invoke(ControllerAction.Fire);
 		}
 	}
 }

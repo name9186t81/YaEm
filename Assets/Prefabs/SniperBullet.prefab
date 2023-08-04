@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 873666193833355798}
   - component: {fileID: 1728015072875418897}
   - component: {fileID: 8952184902284467213}
+  - component: {fileID: -5281351412566453864}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: SniperBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873666193833355799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 0.01, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2809393712542295180}
@@ -102,16 +103,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamNumber: 0
   _name: bulla
-  _size: 0.1
+  _size: 0.15
   _debug: 1
-  _speed: 60
+  _speed: 120
   _movmentType: 0
   _hitMask:
     serializedVersion: 2
     m_Bits: 960
   _react: 1
   _maxBounceTimes: 0
-  _deactivationTime: 0.2
+  _deactivationTime: 2
 --- !u!96 &1728015072875418897
 TrailRenderer:
   serializedVersion: 2
@@ -154,7 +155,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -163,7 +164,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.0991745
+        value: 0.2689877
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -242,6 +243,19 @@ MonoBehaviour:
   _particleSystems:
   - {fileID: 6084284576413606554}
   _alphaUnneffected: 1
+--- !u!114 &-5281351412566453864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873666193833355799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a786e1a11ded84294c85b185c6ca80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 1728015072875418897}
 --- !u!1 &6636852765255325542
 GameObject:
   m_ObjectHideFlags: 0

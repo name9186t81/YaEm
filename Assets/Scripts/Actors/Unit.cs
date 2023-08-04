@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace YaEm {
-	[RequireComponent(typeof(Collider2D)), RequireComponent(typeof(Rigidbody2D))]
+	[RequireComponent(typeof(Collider2D)), RequireComponent(typeof(Rigidbody2D)), DisallowMultipleComponent]
 	public class Unit : Actor, IProjectileReactable, IProvider<IHealth>, IProvider<Motor>
 	{
 		[SerializeField] private int _maxHealth;

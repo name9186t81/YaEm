@@ -12,6 +12,11 @@ public static class Vector2Utils
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
+    public static Vector2 RandomDirection()
+    {
+        return VectorFromAngle(Random.Range(0, Mathf.PI * 2));
+    }
+
     /// <summary>
     /// angle in radians
     /// </summary>
@@ -44,4 +49,10 @@ public static class Vector2Utils
     {
         return Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
     }
+
+
+	public static bool FastDistanceCheck(this Vector2 start, Vector2 end, float dist)
+	{
+		return (start - end).sqrMagnitude < dist * dist;
+	}
 }

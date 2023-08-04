@@ -6,6 +6,7 @@ using UnityEngine.Events;
 namespace YaEm
 {
 	//todo make separated weapons classes for both ranged and melee variants
+	[DisallowMultipleComponent]
 	public class Weapon : MonoBehaviour
 	{
 		[SerializeField] private Actor _owner;
